@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,34 +11,36 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $table = 'Users'; // Make sure this matches your actual table name
+    protected $primaryKey = 'Id';
+    public $timestamps = false;
+    
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'Username', 'Email', 'FirstName', 'LastName', 'Password'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'Password', 'APIRestToken', 'tmpToken'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    // Customize the password attribute name
+    public function getAuthPassword()
+    {
+        return $this->Password;
+    }
+    
+    // Handle the last login update
+    public function touchLastLogin()
+    {
+        $this->LastLoginDate = now();
+        $this->PreviousLoginDate = $this->LastLoginDate;
+        $this->IPAddress = request()->ip();
+        return $this->save();
+    }
+    
+    // Method to check if account is locked or disabled
+    public function isActive()
+    {
+        return !$this->IsLockedOut && !$this->IsDisabled;
+    }
 }
