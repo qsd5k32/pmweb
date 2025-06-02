@@ -138,3 +138,13 @@ Route::apiResource('/States', App\Http\Controllers\StatesController::class);
 Route::apiResource('/SubmittalDetails', App\Http\Controllers\SubmittalDetailsController::class);
 Route::apiResource('/SumOfProgressInvoice', App\Http\Controllers\SumOfProgressInvoiceController::class);
 Route::apiResource('/UpdateProjectStatus', App\Http\Controllers\UpdateProjectStatusController::class);
+
+Route::apiResource('/InitiativeBudget', App\Http\Controllers\InitiativeBudgetController::class)->only([
+    'index', 'show','store', 'update', 'destroy'
+]);
+Route::apiResource('/InitiativeRatings', App\Http\Controllers\InitiativeRatingsController::class)->only([
+    'index', 'show','store', 'update', 'destroy'
+]);
+Route::apiResource('/InitiativeScoring', App\Http\Controllers\InitiativeScoringController::class)->only([
+    'index', 'show','store', 'update', 'destroy'
+]);
