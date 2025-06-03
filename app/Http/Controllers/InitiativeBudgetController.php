@@ -14,7 +14,7 @@ class InitiativeBudgetController extends Controller
             'data' => InitiativeBudget::all()
         ]);
     }
-    public function show(InitiativeBudget $initiativeBudget, $id)
+    public function show($id)
     {
         try {
             $initiativeBudget = InitiativeBudget::findOrFail($id);
@@ -40,15 +40,24 @@ class InitiativeBudgetController extends Controller
             'data' => $initiativeBudget
         ], 201);
     }
-    public function update(Request $request, InitiativeBudget $initiativeBudget)
+    public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $initiativeBudget->update($data);
+        try {
+            $initiativeBudget = InitiativeBudget::findOrFail($id);
+            $data = $request->all();
+            $initiativeBudget->update($data);
 
-        return response()->json([
-            'message' => 'Initiative Budget updated successfully',
-            'data' => $initiativeBudget
-        ]);
+            return response()->json([
+                'message' => 'Initiative Budget updated successfully',
+                'data' => $initiativeBudget
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error retrieving Initiative Budget',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+        
     }
     public function destroy(InitiativeBudget $initiativeBudget, $id)
     {

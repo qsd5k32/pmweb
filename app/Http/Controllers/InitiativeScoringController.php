@@ -50,7 +50,7 @@ class InitiativeScoringController extends Controller
             'data' => $InitiativeScoring
         ]);
     }
-    public function destroy(InitiativeScoring $InitiativeScoring, $id)
+    public function destroy( $id)
     {
         try {
             $InitiativeScoring = InitiativeScoring::findOrFail($id);

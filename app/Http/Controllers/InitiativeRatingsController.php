@@ -14,7 +14,7 @@ class InitiativeRatingsController extends Controller
             'data' => InitiativeRatings::all()
         ]);
     }
-    public function show(InitiativeRatings $InitiativeRatings, $id)
+    public function show($id)
     {
         try {
             $InitiativeRatings = InitiativeRatings::findOrFail($id);
@@ -40,15 +40,30 @@ class InitiativeRatingsController extends Controller
             'data' => $InitiativeRatings
         ], 201);
     }
-    public function update(Request $request, InitiativeRatings $InitiativeRatings)
+    public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $InitiativeRatings->update($data);
+        try {
+            $InitiativeRatings = InitiativeRatings::findOrFail($id);
+            $data = $request->all();
+            // return response()->json([
+            //     'all_data' => $request->all(),
+            //     'input_data' => $request->input(),
+            //     'json_data' => $request->json()->all(),
+            //     'content_type' => $request->header('Content-Type'),
+            //     'method' => $request->method()
+            // ]);
+            $InitiativeRatings->update($data);
 
-        return response()->json([
-            'message' => 'Initiative Rating updated successfully',
-            'data' => $InitiativeRatings
-        ]);
+            return response()->json([
+                'message' => 'Initiative Rating updated successfully',
+                'data' => $InitiativeRatings
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error updating Initiative Rating',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
     public function destroy(InitiativeRatings $InitiativeRatings, $id)
     {

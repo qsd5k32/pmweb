@@ -143,7 +143,7 @@ Route::apiResource('/InitiativeBudget', App\Http\Controllers\InitiativeBudgetCon
     'index', 'show','store', 'update', 'destroy'
 ]);
 Route::apiResource('/InitiativeRatings', App\Http\Controllers\InitiativeRatingsController::class)->only([
-    'index', 'show','store', 'update', 'destroy'
+    'index', 'show', 'store', 'update', 'destroy'
 ]);
 Route::apiResource('/InitiativeScoring', App\Http\Controllers\InitiativeScoringController::class)->only([
     'index', 'show','store', 'update', 'destroy'
