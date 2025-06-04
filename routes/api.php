@@ -118,7 +118,7 @@ Route::apiResource('/ProjectCommitmentsDetails', App\Http\Controllers\ProjectCom
 Route::apiResource('/ProjectLocations', App\Http\Controllers\ProjectLocationsController::class)->only([
     'index', 'store', 'destroy'
 ]);
-Route::apiResource('/ProjectStatus', App\Http\Controllers\ProjectStatusesController::class)->only([
+Route::apiResource('/ProjectStatuses', App\Http\Controllers\ProjectStatusesController::class)->only([
     'index', 'store', 'destroy'
 ]);
 Route::apiResource('/ProjectTypes', App\Http\Controllers\ProjectTypesController::class)->only([
