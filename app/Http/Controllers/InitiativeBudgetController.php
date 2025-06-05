@@ -9,9 +9,10 @@ class InitiativeBudgetController extends Controller
 {
     public function index()
     {
+        $budget = InitiativeBudget::with(['project', 'status', 'type', 'category', 'priority', 'currency'])->get();
         return response()->json([
             'message' => 'Initiative Budgets',
-            'data' => InitiativeBudget::all()
+            'data' => $budget
         ]);
     }
     public function show($id)
@@ -59,25 +60,51 @@ class InitiativeBudgetController extends Controller
         }
         
     }
-    public function destroy(InitiativeBudget $initiativeBudget, $id)
+    public function destroy(Request $request)
     {
         try {
-            $initiativeBudget = InitiativeBudget::findOrFail($id);
-            $deleted = $initiativeBudget->delete();
+            $ids = $request->input('ids');
+            
+            if (!is_array($ids) || empty($ids)) {
+                throw new \Exception('Please provide an array of IDs to delete');
+            }
+
+            $deleted = InitiativeBudget::whereIn('id', $ids)->delete();
 
             if (!$deleted) {
-                throw new \Exception('Failed to delete Initiative Budget');
+                throw new \Exception('Failed to delete Initiative Budgets');
             }
 
             return response()->json([
-                'message' => 'Initiative Budget deleted successfully'
+                'message' => 'Initiative Budgets deleted successfully',
+                'count' => $deleted
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Error deleting Initiative Budget',
+                'message' => 'Error deleting Initiative Budgets',
                 'error' => $e->getMessage()
             ], 500);
         }
     }
+    // public function destroy(InitiativeBudget $initiativeBudget, $id)
+    // {
+    //     try {
+    //         $initiativeBudget = InitiativeBudget::findOrFail($id);
+    //         $deleted = $initiativeBudget->delete();
+
+    //         if (!$deleted) {
+    //             throw new \Exception('Failed to delete Initiative Budget');
+    //         }
+
+    //         return response()->json([
+    //             'message' => 'Initiative Budget deleted successfully'
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'message' => 'Error deleting Initiative Budget',
+    //             'error' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
 
 }

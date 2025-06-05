@@ -10,5 +10,7 @@ class Priorities extends Model
     use HasFactory;
 
     protected $table = 'AV_Priorities';
+    protected $primaryKey = 'Id';
+    protected $keyType = 'string';
     protected $guarded = [];
 }

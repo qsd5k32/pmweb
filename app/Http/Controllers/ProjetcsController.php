@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Projetcs;
+use App\Models\Projects;
 use Illuminate\Http\Request;
 
 class ProjetcsController extends Controller
@@ -14,7 +14,7 @@ class ProjetcsController extends Controller
     {
         return response()->json([
             'message' => 'Projects',
-            'data' => Projetcs::all()
+            'data' => Projects::all()
         ]);
     }
 
@@ -37,7 +37,7 @@ class ProjetcsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Projetcs $projetcs)
+    public function show(Projects $projects)
     {
         //
     }
@@ -45,7 +45,7 @@ class ProjetcsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Projetcs $projetcs)
+    public function edit(Projects $projects)
     {
         //
     }
@@ -53,7 +53,7 @@ class ProjetcsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Projetcs $projetcs)
+    public function update(Request $request, Projects $projects)
     {
         //
     }
@@ -61,7 +61,7 @@ class ProjetcsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Projetcs $projetcs)
+    public function destroy(Projects $projects)
     {
         //
     }

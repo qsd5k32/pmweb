@@ -10,4 +10,8 @@ class ProjectStatuses extends Model
     use HasFactory;
     protected $table = 'AV_ProjectStatuses';
     protected $guarded = [];
+    protected $primaryKey = 'Id';
+    protected $keyType = 'string';
+
+
 }
