@@ -19,6 +19,7 @@ class InitiativeBudgetController extends Controller
     {
         try {
             $initiativeBudget = InitiativeBudget::findOrFail($id);
+            $initiativeBudget->load(['project', 'status', 'type', 'category', 'priority', 'currency']);
             return response()->json([
                 'message' => 'Initiative Budget retrieved successfully',
                 'data' => $initiativeBudget
@@ -35,6 +36,7 @@ class InitiativeBudgetController extends Controller
 
         $data = $request->all();
         $initiativeBudget = InitiativeBudget::create($data);
+        $initiativeBudget->load(['project', 'status', 'type', 'category', 'priority', 'currency']);
 
         return response()->json([
             'message' => 'Initiative Budget created successfully',
@@ -47,6 +49,8 @@ class InitiativeBudgetController extends Controller
             $initiativeBudget = InitiativeBudget::findOrFail($id);
             $data = $request->all();
             $initiativeBudget->update($data);
+
+            $initiativeBudget->load(['project', 'status', 'type', 'category', 'priority', 'currency']);
 
             return response()->json([
                 'message' => 'Initiative Budget updated successfully',
