@@ -36,11 +36,15 @@ class InitiativeBudgetController extends Controller
 
         $data = $request->all();
         $initiativeBudget = InitiativeBudget::create($data);
-        $initiativeBudget->load(['project', 'status', 'type', 'category', 'priority', 'currency']);
+
+        // find the last created InitiativeBudget
+        $latestCreated = InitiativeBudget::orderBy('Id', 'desc')->first();
+
+        $latestCreated->load(['project', 'status', 'type', 'category', 'priority', 'currency']);
 
         return response()->json([
             'message' => 'Initiative Budget created successfully',
-            'data' => $initiativeBudget
+            'data' => $latestCreated
         ], 201);
     }
     public function update(Request $request, $id)
