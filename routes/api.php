@@ -140,9 +140,9 @@ Route::apiResource('/SumOfProgressInvoice', App\Http\Controllers\SumOfProgressIn
 Route::apiResource('/UpdateProjectStatus', App\Http\Controllers\UpdateProjectStatusController::class);
 
 Route::apiResource('/InitiativeBudget', App\Http\Controllers\InitiativeBudgetController::class)->only([
-    'index', 'show','store', 'update'
+    'index', 'show','store', 'update', 'destroy'
 ]);
-Route::post('/InitiativeBudget-remove', [App\Http\Controllers\InitiativeBudgetController::class, 'destroy']);
+// Route::post('/InitiativeBudget-remove', [App\Http\Controllers\InitiativeBudgetController::class, 'destroy']);
 Route::apiResource('/InitiativeRatings', App\Http\Controllers\InitiativeRatingsController::class)->only([
     'index', 'show', 'store', 'update', 'destroy'
 ]);
