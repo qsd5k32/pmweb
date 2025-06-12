@@ -167,6 +167,7 @@ Route::apiResource('/InitiativeBudget', App\Http\Controllers\InitiativeBudgetCon
     'index', 'show','store', 'update', 'destroy'
 ]);
 // Route::post('/InitiativeBudget-remove', [App\Http\Controllers\InitiativeBudgetController::class, 'destroy']);
+
 Route::apiResource('/InitiativeRatings', App\Http\Controllers\InitiativeRatingsController::class)->only([
     'index', 'show', 'store', 'update', 'destroy'
 ]);
