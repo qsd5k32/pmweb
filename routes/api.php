@@ -5,6 +5,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
+
+Route::post('/deploy', function (Request $request) {
+    $secret = env('GITHUB_WEBHOOK_SECRET');
+
+    $signature = 'sha256=' . hash_hmac('sha256', $request->getContent(), $secret);
+    /*if(!$request->header('X-Hub-Signature-256'))
+    {
+        abort(403, 'Unauthorized action.');
+    }
+    if (!hash_equals($signature, $request->header('X-Hub-Signature-256'))) {
+        abort(403, 'Unauthorized action.');
+    }*/
+    // test working webhook
+    $output = [];
+    $status = 0;
+
+    exec('/var/www/pmweb/deploy.sh', $output, $status);
+    //exec('whoami', $output, $status);
+
+    return response()->json([
+        'status' => $status === 0 ? 'success' : 'failure',
+        'output' => $output,
+    ]);
+});
 /*
 |--------------------------------------------------------------------------
 | API Routes
