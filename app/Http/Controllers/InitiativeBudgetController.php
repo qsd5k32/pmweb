@@ -68,32 +68,6 @@ class InitiativeBudgetController extends Controller
         }
         
     }
-    // public function destroy(Request $request)
-    // {
-    //     try {
-    //         $ids = $request->input('ids');
-            
-    //         if (!is_array($ids) || empty($ids)) {
-    //             throw new \Exception('Please provide an array of IDs to delete');
-    //         }
-
-    //         $deleted = InitiativeBudget::whereIn('id', $ids)->delete();
-
-    //         if (!$deleted) {
-    //             throw new \Exception('Failed to delete Initiative Budgets');
-    //         }
-
-    //         return response()->json([
-    //             'message' => 'Initiative Budgets deleted successfully',
-    //             'count' => $deleted
-    //         ]);
-    //     } catch (\Exception $e) {
-    //         return response()->json([
-    //             'message' => 'Error deleting Initiative Budgets',
-    //             'error' => $e->getMessage()
-    //         ], 500);
-    //     }
-    // }
     public function destroy(InitiativeBudget $initiativeBudget, $id)
     {
         try {

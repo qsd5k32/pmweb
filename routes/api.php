@@ -127,6 +127,7 @@ Route::apiResource('/SafetyFormsTypes', App\Http\Controllers\SafetyFormsTypesCon
 Route::apiResource('/IncidentInfo', App\Http\Controllers\IncidentInfoController::class);
 Route::apiResource('/InspectionDetails', App\Http\Controllers\InspectionDetailsController::class);
 Route::apiResource('/ListOfPrograms', App\Http\Controllers\ListOfProgramsController::class);
+Route::apiResource('/programs', App\Http\Controllers\ProgramsController::class);
 Route::apiResource('/NCRDangerDisciplines', App\Http\Controllers\NCRDangerDisciplinesController::class);
 Route::apiResource('/PaymentDetails', App\Http\Controllers\PaymentDetailsController::class);
 Route::apiResource('/PaymentsSumForProjects', App\Http\Controllers\PaymentsSumForProjectsController::class);
@@ -172,5 +173,8 @@ Route::apiResource('/InitiativeRatings', App\Http\Controllers\InitiativeRatingsC
     'index', 'show', 'store', 'update', 'destroy'
 ]);
 Route::apiResource('/InitiativeScoring', App\Http\Controllers\InitiativeScoringController::class)->only([
+    'index', 'show','store', 'update', 'destroy'
+]);
+Route::apiResource('/pbs', App\Http\Controllers\PBsController::class)->only([
     'index', 'show','store', 'update', 'destroy'
 ]);
