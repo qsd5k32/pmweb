@@ -178,3 +178,9 @@ Route::apiResource('/InitiativeScoring', App\Http\Controllers\InitiativeScoringC
 Route::apiResource('/pbs', App\Http\Controllers\PBsController::class)->only([
     'index', 'show','store', 'update', 'destroy'
 ]);
+Route::apiResource('/funding-source', App\Http\Controllers\FundingSourceController::class)->only([
+    'index', 'show','store', 'update', 'destroy'
+]);
+Route::apiResource('/workflow-calender', App\Http\Controllers\WorkflowCalenderController::class)->only([
+    'index', 'show','store', 'update', 'destroy'
+]);
