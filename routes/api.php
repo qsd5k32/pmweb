@@ -184,3 +184,8 @@ Route::apiResource('/funding-source', App\Http\Controllers\FundingSourceControll
 Route::apiResource('/workflow-calender', App\Http\Controllers\WorkflowCalenderController::class)->only([
     'index', 'show','store', 'update', 'destroy'
 ]);
+
+Route::get('/locations', [App\Http\Controllers\LocationController::class, 'index']);
+
+Route::get('/sponsors', [App\Http\Controllers\SponsorController::class, 'index']);
+Route::get('/project-managers', [App\Http\Controllers\ProjectManagerController::class, 'index']);
