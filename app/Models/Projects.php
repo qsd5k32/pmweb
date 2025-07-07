@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Projects extends Model
 {
     use HasFactory;
-    protected $table = 'AV_Projetcs';
+    protected $table = 'AV_Projects';
+    public $timestamps = false;
     protected $primaryKey = 'Id';
     protected $keyType = 'string';
     protected $guarded = [];

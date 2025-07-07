@@ -154,7 +154,9 @@ Route::apiResource('/ProjectTypes', App\Http\Controllers\ProjectTypesController:
 //     Route::post('/', [App\Http\Controllers\ProjectTypesController::class, 'store']);
 //     Route::delete('/{projectType}', [App\Http\Controllers\ProjectTypesController::class, 'destroy']);
 // });
-Route::apiResource('/Projects', App\Http\Controllers\ProjetcsController::class);
+Route::apiResource('/Projects', App\Http\Controllers\ProjetcsController::class)->only([
+    'index', 'show','store', 'update', 'destroy'
+]);
 Route::apiResource('/RfiAnsweredDays', App\Http\Controllers\RfiAnsweredDaysController::class);
 Route::apiResource('/RFIsCountOf', App\Http\Controllers\RFIsCountOfController::class);
 Route::apiResource('/SafetyFormInfo', App\Http\Controllers\SafetyFormInfoController::class);
