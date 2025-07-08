@@ -191,3 +191,11 @@ Route::get('/locations', [App\Http\Controllers\LocationController::class, 'index
 
 Route::get('/sponsors', [App\Http\Controllers\SponsorController::class, 'index']);
 Route::get('/project-managers', [App\Http\Controllers\ProjectManagerController::class, 'index']);
+
+// Programs List
+Route::get('/programs-list', [App\Http\Controllers\ProgramsListController::class, 'index']);
+
+// project scopes
+Route::apiResource('/project-scopes', App\Http\Controllers\ProjectScopesController::class)->only([
+    'index', 'show','store', 'update', 'destroy'
+]);

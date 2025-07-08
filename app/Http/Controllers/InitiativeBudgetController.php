@@ -9,7 +9,7 @@ class InitiativeBudgetController extends Controller
 {
     public function index()
     {
-        $budget = InitiativeBudget::with(['project', 'status', 'type', 'category', 'priority', 'currency'])->get();
+        $budget = InitiativeBudget::with(['project', 'status', 'type', 'category', 'priority', 'currency', 'projectManager', 'sponsor', 'location', 'pbs', 'program', 'scopes'])->get();
         return response()->json([
             'message' => 'Initiative Budgets',
             'data' => $budget
@@ -19,7 +19,7 @@ class InitiativeBudgetController extends Controller
     {
         try {
             $initiativeBudget = InitiativeBudget::findOrFail($id);
-            $initiativeBudget->load(['project', 'status', 'type', 'category', 'priority', 'currency']);
+            $initiativeBudget->load(['project', 'status', 'type', 'category', 'priority', 'currency', 'projectManager', 'sponsor', 'location', 'pbs', 'program', 'scopes']);
             return response()->json([
                 'message' => 'Initiative Budget retrieved successfully',
                 'data' => $initiativeBudget
@@ -40,7 +40,7 @@ class InitiativeBudgetController extends Controller
         // find the last created InitiativeBudget
         $latestCreated = InitiativeBudget::orderBy('Id', 'desc')->first();
 
-        $latestCreated->load(['project', 'status', 'type', 'category', 'priority', 'currency']);
+        $latestCreated->load(['project', 'status', 'type', 'category', 'priority', 'currency', 'projectManager', 'sponsor', 'location', 'pbs', 'program', 'scopes']);
 
         return response()->json([
             'message' => 'Initiative Budget created successfully',
@@ -54,7 +54,7 @@ class InitiativeBudgetController extends Controller
             $data = $request->all();
             $initiativeBudget->update($data);
 
-            $initiativeBudget->load(['project', 'status', 'type', 'category', 'priority', 'currency']);
+            $initiativeBudget->load(['project', 'status', 'type', 'category', 'priority', 'currency', 'projectManager', 'sponsor', 'location', 'pbs','program', 'scopes']);
 
             return response()->json([
                 'message' => 'Initiative Budget updated successfully',

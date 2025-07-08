@@ -42,5 +42,35 @@ class InitiativeBudget extends Model
     {
         return $this->belongsTo(Priorities::class, 'PriorityId', 'Id');
     }
+    // project manager
+    public function projectManager()
+    {
+        return $this->belongsTo(ProjectManager::class, 'ProjectManagerId', 'Id');
+    }
+    // sponsor
+    public function sponsor()
+    {
+        return $this->belongsTo(Sponsor::class, 'SponsorId', 'Id');
+    }
+    // location
+    public function location()
+    {
+        return $this->belongsTo(ProjectLocations::class, 'LocationId', 'Id');
+    }
+    // Pbs
+    public function pbs()
+    {
+        return $this->belongsTo(PB::class, 'PBSId', 'Id');
+    }
+    // relation to programs list
+    public function program()
+    {
+        return $this->belongsTo(ProgramsList::class, 'ProgramId', 'Id');
+    }
+    // scopes
+    public function scopes()
+    {
+        return $this->hasMany(ProjectScopes::class, 'ProjectId', 'ProjectId');
+    }
 
 }
