@@ -55,7 +55,7 @@ class InitiativeBudget extends Model
     // location
     public function location()
     {
-        return $this->belongsTo(ProjectLocations::class, 'LocationId', 'Id');
+        return $this->belongsTo(Location::class, 'AssetLocationId', 'Id');
     }
     // Pbs
     public function pbs()
