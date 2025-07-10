@@ -72,5 +72,10 @@ class InitiativeBudget extends Model
     {
         return $this->hasMany(ProjectScopes::class, 'ProjectId', 'ProjectId');
     }
+    // funding source
+    public function fundingSource()
+    {
+        return $this->belongsTo(FundingSource::class, 'FundingSourceId', 'Id');
+    }
 
 }
