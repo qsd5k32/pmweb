@@ -7,9 +7,34 @@ use Illuminate\Http\Request;
 
 class InitiativeBudgetController extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+    //     $budget = InitiativeBudget::with(['project', 'status', 'type', 'category', 'priority', 'currency', 'projectManager', 'sponsor', 'location', 'pbs', 'program', 'scopes', 'fundingSource'])->get();
+    //     return response()->json([
+    //         'message' => 'Initiative Budgets',
+    //         'data' => $budget
+    //     ]);
+    // }
+
+    public function index(Request $request)
     {
-        $budget = InitiativeBudget::with(['project', 'status', 'type', 'category', 'priority', 'currency', 'projectManager', 'sponsor', 'location', 'pbs', 'program', 'scopes', 'fundingSource'])->get();
+        $query = InitiativeBudget::with([
+            'project', 'status', 'type', 'category', 'priority', 'currency',
+            'projectManager', 'sponsor', 'location', 'pbs', 'program', 'scopes', 'fundingSource', 'workflowTemplate', 'createdBy'
+        ]);
+
+        if ($request->has('priority')) {
+            $query->where('PriorityId', $request->input('priority'));
+        }
+        if ($request->has('type')) {
+            $query->where('TypeId', $request->input('type'));
+        }
+        if ($request->has('program')) {
+            $query->where('ProgramId', $request->input('program'));
+        }
+
+        $budget = $query->get();
+
         return response()->json([
             'message' => 'Initiative Budgets',
             'data' => $budget
@@ -19,7 +44,7 @@ class InitiativeBudgetController extends Controller
     {
         try {
             $initiativeBudget = InitiativeBudget::findOrFail($id);
-            $initiativeBudget->load(['project', 'status', 'type', 'category', 'priority', 'currency', 'projectManager', 'sponsor', 'location', 'pbs', 'program', 'scopes', 'fundingSource']);
+            $initiativeBudget->load(['project', 'status', 'type', 'category', 'priority', 'currency', 'projectManager', 'sponsor', 'location', 'pbs', 'program', 'scopes', 'fundingSource', 'workflowTemplate', 'createdBy']);
             return response()->json([
                 'message' => 'Initiative Budget retrieved successfully',
                 'data' => $initiativeBudget
@@ -40,7 +65,7 @@ class InitiativeBudgetController extends Controller
         // find the last created InitiativeBudget
         $latestCreated = InitiativeBudget::orderBy('Id', 'desc')->first();
 
-        $latestCreated->load(['project', 'status', 'type', 'category', 'priority', 'currency', 'projectManager', 'sponsor', 'location', 'pbs', 'program', 'scopes', 'fundingSource']);
+        $latestCreated->load(['project', 'status', 'type', 'category', 'priority', 'currency', 'projectManager', 'sponsor', 'location', 'pbs', 'program', 'scopes', 'fundingSource', 'workflowTemplate', 'createdBy']);
 
         return response()->json([
             'message' => 'Initiative Budget created successfully',
@@ -54,7 +79,7 @@ class InitiativeBudgetController extends Controller
             $data = $request->all();
             $initiativeBudget->update($data);
 
-            $initiativeBudget->load(['project', 'status', 'type', 'category', 'priority', 'currency', 'projectManager', 'sponsor', 'location', 'pbs','program', 'scopes']);
+            $initiativeBudget->load(['project', 'status', 'type', 'category', 'priority', 'currency', 'projectManager', 'sponsor', 'location', 'pbs','program', 'scopes', 'workflowTemplate', 'createdBy']);
 
             return response()->json([
                 'message' => 'Initiative Budget updated successfully',

@@ -78,4 +78,16 @@ class InitiativeBudget extends Model
         return $this->belongsTo(FundingSource::class, 'FundingSourceId', 'Id');
     }
 
+    // workflow template
+    public function workflowTemplate()
+    {
+        return $this->belongsTo(WorkflowTemplate::class, 'TemplateId', 'Id');
+    }
+
+    // created by
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'CreatedBy', 'Id');
+    }
+
 }

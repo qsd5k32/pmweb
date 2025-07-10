@@ -199,3 +199,15 @@ Route::get('/programs-list', [App\Http\Controllers\ProgramsListController::class
 Route::apiResource('/project-scopes', App\Http\Controllers\ProjectScopesController::class)->only([
     'index', 'show','store', 'update', 'destroy'
 ]);
+
+// workflow template
+Route::get('/workflow-templates-list', [App\Http\Controllers\WorkflowTemplateController::class, 'list']);
+Route::apiResource('/workflow-templates', App\Http\Controllers\WorkflowTemplateController::class)->only([
+    'index', 'show','store', 'update', 'destroy'
+]);
+
+// Users
+Route::get('/users-list', [App\Http\Controllers\UserController::class, 'list']);
+Route::apiResource('/users', App\Http\Controllers\UserController::class)->only([
+    'index', 'show','store', 'update', 'destroy'
+]);
