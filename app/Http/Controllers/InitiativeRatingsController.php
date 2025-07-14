@@ -7,11 +7,28 @@ use Illuminate\Http\Request;
 
 class InitiativeRatingsController extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+    //     $InitiativeRatings = InitiativeRatings::with('User')->get();
+    //     return response()->json([
+    //         'message' => 'Initiative Ratings',
+    //         'data' => $InitiativeRatings
+    //     ]);
+    // }
+    public function index(Request $request)
     {
+        $query = InitiativeRatings::with('User');
+        
+        // Filter by initiativeBudgetId if provided
+        if ($request->has('InitiativeBudgetId') && $request->InitiativeBudgetId) {
+            $query->where('InitiativeBudgetId', $request->InitiativeBudgetId);
+        }
+        
+        $InitiativeRatings = $query->get();
+        
         return response()->json([
             'message' => 'Initiative Ratings',
-            'data' => InitiativeRatings::all()
+            'data' => $InitiativeRatings
         ]);
     }
     public function show($id)
@@ -20,7 +37,7 @@ class InitiativeRatingsController extends Controller
             $InitiativeRatings = InitiativeRatings::findOrFail($id);
             return response()->json([
                 'message' => 'Initiative Rating retrieved successfully',
-                'data' => $InitiativeRatings
+                'data' => $InitiativeRatings->load('User')
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -34,6 +51,7 @@ class InitiativeRatingsController extends Controller
 
         $data = $request->all();
         $InitiativeRatings = InitiativeRatings::create($data);
+        $InitiativeRatings->load('User');
 
         return response()->json([
             'message' => 'Initiative Rating created successfully',
@@ -53,6 +71,7 @@ class InitiativeRatingsController extends Controller
             //     'method' => $request->method()
             // ]);
             $InitiativeRatings->update($data);
+            $InitiativeRatings->load('User');
 
             return response()->json([
                 'message' => 'Initiative Rating updated successfully',

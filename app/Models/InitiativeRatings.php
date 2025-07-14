@@ -13,4 +13,10 @@ class InitiativeRatings extends Model
     public $timestamps = false;
     protected $keyType = 'string';
     protected $guarded = [];
+
+    // users relation
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'UserId', 'Id');
+    }
 }
