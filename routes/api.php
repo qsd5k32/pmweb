@@ -111,6 +111,12 @@ Route::apiResource('/CommitmentTypes', App\Http\Controllers\CommitmentTypesContr
     'index', 'store', 'destroy'
 ]);
 Route::apiResource('/CompaniesList', App\Http\Controllers\CompaniesListController::class);
+// Route::get('/CompaniesList', [App\Http\Controllers\CompaniesListController::class, 'index']);
+// Route::post('/CompaniesList', [App\Http\Controllers\CompaniesListController::class, 'store']);
+// Route::get('/CompaniesList/{id}', [App\Http\Controllers\CompaniesListController::class, 'show']);
+// Route::put('/CompaniesList/{id}', [App\Http\Controllers\CompaniesListController::class, 'update']);
+// Route::delete('/CompaniesList/{id}', [App\Http\Controllers\CompaniesListController::class, 'destroy']);
+
 Route::apiResource('/CorrictiveActions', App\Http\Controllers\CorrictiveActionsController::class);
 Route::apiResource('/CountOfAccidents', App\Http\Controllers\CountOfAccidentsController::class);
 Route::apiResource('/CountOfCommitmentProjects', App\Http\Controllers\CountOfCommitmentProjectsController::class);

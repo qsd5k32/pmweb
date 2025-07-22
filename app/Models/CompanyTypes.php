@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CompanyTypes extends Model
 {
     use HasFactory;
-    protected $table = 'CompanyTypes';
+    protected $table = 'AV_CompanyTypes';
     public $timestamps = false;
     protected $primaryKey = 'Id';
     protected $keyType = 'string';

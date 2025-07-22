@@ -12,9 +12,10 @@ class CompaniesListController extends Controller
      */
     public function index()
     {
+        $companiesList = CompaniesList::with('companyType')->get();
         return response()->json([
             'message' => 'Companies List',
-            'data' => CompaniesList::all()
+            'data' => $companiesList
         ]);
     }
 
@@ -31,7 +32,11 @@ class CompaniesListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $company = CompaniesList::create($request->all());
+        return response()->json([
+            'message' => 'Company created successfully',
+            'data' => $company->load('companyType')
+        ]);
     }
 
     /**
@@ -53,16 +58,29 @@ class CompaniesListController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CompaniesList $companiesList)
+    public function update(Request $request, $id)
     {
-        //
+        $companiesList = CompaniesList::findOrFail($id);
+        if (!$companiesList) {
+            return response()->json(['message' => 'Company not found'], 404);
+        }
+        $companiesList->update($request->all());
+        return response()->json([
+            'message' => 'Company updated successfully',
+            'data' => $companiesList->load('companyType')
+        ]); 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CompaniesList $companiesList)
+    public function destroy($id)
     {
-        //
+        $companiesList = CompaniesList::findOrFail($id);
+        if (!$companiesList) {
+            return response()->json(['message' => 'Company not found'], 404);
+        }
+        $companiesList->delete();
+        return response()->json(['message' => 'Company deleted successfully']);
     }
 }
