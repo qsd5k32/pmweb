@@ -145,6 +145,8 @@ Route::apiResource('/ProgressInvoiceDetails', App\Http\Controllers\ProgressInvoi
 Route::apiResource('/ProjectCategories', App\Http\Controllers\ProjectCategoriesController::class)->only([
     'index', 'store', 'destroy'
 ]);
+// Commitments Details
+Route::apiResource('/commitments', App\Http\Controllers\CommitmentsController::class);
 Route::apiResource('/ProjectCommitmentsDetails', App\Http\Controllers\ProjectCommitmentsDetailsController::class);
 Route::apiResource('/ProjectLocations', App\Http\Controllers\ProjectLocationsController::class)->only([
     'index', 'store', 'destroy'
