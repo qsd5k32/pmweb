@@ -15,6 +15,17 @@ class CommitmentsController extends Controller
             'data' => $commitments
         ]);
     }
+    public function show($id)
+    {
+        $commitment = Commitments::findOrFail($id);
+        if (!$commitment) {
+            return response()->json(['message' => 'Commitment not found'], 404);
+        }
+        return response()->json([
+            'message' => 'Commitment retrieved successfully',
+            'data' => $commitment
+        ]);
+    }
     public function store(Request $request)
     {
         $commitment = Commitments::create($request->all());
