@@ -208,6 +208,11 @@ Route::apiResource('/project-scopes', App\Http\Controllers\ProjectScopesControll
     'index', 'show','store', 'update', 'destroy'
 ]);
 
+// Billing Terms
+Route::apiResource('/billing-terms', App\Http\Controllers\BillingTermsListController::class)->only([
+    'index', 'show','store', 'update', 'destroy'
+]);
+
 // workflow template
 Route::get('/workflow-templates-list', [App\Http\Controllers\WorkflowTemplateController::class, 'list']);
 Route::apiResource('/workflow-templates', App\Http\Controllers\WorkflowTemplateController::class)->only([
