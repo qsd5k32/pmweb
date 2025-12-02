@@ -28,10 +28,12 @@ class CommitmentsController extends Controller
     }
     public function store(Request $request)
     {
-        $commitment = Commitments::create($request->all());
+        $data = $request->all();
+        $commitment = Commitments::create($data);
+        $latestCreated = Commitments::orderBy('Id', 'desc')->first();
         return response()->json([
             'message' => 'Commitments created successfully',
-            'data' => $commitment
+            'data' => $latestCreated
         ]);
     }
     public function update(Request $request, $id)
@@ -41,6 +43,7 @@ class CommitmentsController extends Controller
             return response()->json(['message' => 'Commitment not found'], 404);
         }
         $commitment->update($request->all());
+        $commitment->refresh();
         return response()->json([
             'message' => 'Commitment updated successfully',
             'data' => $commitment
