@@ -224,3 +224,7 @@ Route::get('/users-list', [App\Http\Controllers\UserController::class, 'list']);
 Route::apiResource('/users', App\Http\Controllers\UserController::class)->only([
     'index', 'show','store', 'update', 'destroy'
 ]);
+
+// Get the DB Views
+Route::get('/views', [\App\Http\Controllers\MediaController::class, 'views']);
+Route::get('/view/{view}', [\App\Http\Controllers\MediaController::class, 'viewData']);
