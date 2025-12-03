@@ -81,6 +81,12 @@ Route::get('/tables', function () {
         })
     ]);
 });
+Route::get('/debug', function() {
+    return response()->json([
+        'database' => DB::getDatabaseName(),
+        'all_views' => DB::select("SELECT TABLE_NAME, TABLE_SCHEMA FROM INFORMATION_SCHEMA.VIEWS")
+    ]);
+});
 
 
 Route::get('/tables/submital', function () {

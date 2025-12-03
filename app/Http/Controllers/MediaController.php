@@ -15,38 +15,34 @@ class MediaController extends Controller
      */
     public function views(): JsonResponse
     {
-        $database = DB::getDatabaseName();
+        $views = DB::select("
+            SELECT TABLE_NAME 
+            FROM INFORMATION_SCHEMA.VIEWS 
+            WHERE TABLE_SCHEMA = 'dbo'
+            ORDER BY TABLE_NAME
+        ");
 
-        $views = DB::table('information_schema.VIEWS')
-            ->select('TABLE_NAME')
-            ->where('TABLE_SCHEMA', $database)
-            ->get()
-            ->map(function ($view) {
+        return response()->json([
+            'views' => collect($views)->map(function ($view) {
                 return [
                     'name' => $view->TABLE_NAME,
                     'api_url' => url("/api/view/{$view->TABLE_NAME}"),
                 ];
-            });
-
-        return response()->json([
-            'views' => $views
+            })
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function viewData(string $view)
+    public function viewData(string $view): JsonResponse
     {
-        $database = DB::getDatabaseName();
-
         // Check if the view exists
-        $exists = DB::table('information_schema.VIEWS')
-            ->where('TABLE_SCHEMA', $database)
-            ->where('TABLE_NAME', $view)
-            ->exists();
+        $exists = DB::select("
+            SELECT 1 
+            FROM INFORMATION_SCHEMA.VIEWS 
+            WHERE TABLE_SCHEMA = 'dbo' 
+            AND TABLE_NAME = ?
+        ", [$view]);
 
-        if (! $exists) {
+        if (empty($exists)) {
             return response()->json([
                 'error' => 'View not found'
             ], 404);
@@ -58,6 +54,7 @@ class MediaController extends Controller
 
             return response()->json([
                 'view' => $view,
+                'columns' => $columns,
                 'data' => $data,
             ]);
         } catch (\Exception $e) {
