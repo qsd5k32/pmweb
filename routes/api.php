@@ -107,9 +107,7 @@ Route::apiResource('/SiteHandOverDays', App\Http\Controllers\SiteHandOverDaysCon
 Route::apiResource('/CommitmentCategories', App\Http\Controllers\CommitmentCategoriesController::class)->only([
     'index', 'store', 'destroy'
 ]);
-Route::apiResource('/CommitmentTypes', App\Http\Controllers\CommitmentTypesController::class)->only([
-    'index', 'store', 'destroy'
-]);
+Route::apiResource('/CommitmentTypes', App\Http\Controllers\CommitmentTypesController::class);
 Route::apiResource('/CompaniesList', App\Http\Controllers\CompaniesListController::class);
 // Route::get('/CompaniesList', [App\Http\Controllers\CompaniesListController::class, 'index']);
 // Route::post('/CompaniesList', [App\Http\Controllers\CompaniesListController::class, 'store']);
