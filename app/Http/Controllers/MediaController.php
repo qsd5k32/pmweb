@@ -54,7 +54,7 @@ class MediaController extends Controller
 
             return response()->json([
                 'view' => $view,
-                'columns' => $columns,
+                // 'columns' => $columns,
                 'data' => $data,
             ]);
         } catch (\Exception $e) {
