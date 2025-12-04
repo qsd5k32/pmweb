@@ -17,6 +17,14 @@ class CommitmentCategoriesController extends Controller
             'data' => CommitmentCategories::all()
         ]);
     }
+    // show
+    public function show($id)
+    {
+        return response()->json([
+            'message' => 'Commitment Category',
+            'data' => CommitmentCategories::findOrFail($id)
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      */
