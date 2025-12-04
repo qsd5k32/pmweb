@@ -26,6 +26,7 @@ class CommitmentTypesController extends Controller
             'CommitmentType' => 'required|string|max:255',
         ]);
         $commitmentType = CommitmentTypes::create($validatedData);
+        $commitmentType->refresh();
         return response()->json([
             'message' => 'Commitment Type created successfully',
             'data' => $commitmentType
@@ -41,6 +42,7 @@ class CommitmentTypesController extends Controller
             'CommitmentType' => 'required|string|max:255',
         ]);
         $commitmentTypes->update($validatedData);
+        $commitmentTypes->refresh();
         return response()->json([
             'message' => 'Commitment Type updated successfully',
             'data' => $commitmentTypes
