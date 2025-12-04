@@ -9,5 +9,9 @@ class CommitmentCategories extends Model
 {
     use HasFactory;
     protected $table = 'AV_CommitmentCategories';
+
+    protected $primaryKey = 'Id';
+    public $timestamps = false;
+    protected $keyType = 'string';
     protected $guarded = [];
 }
