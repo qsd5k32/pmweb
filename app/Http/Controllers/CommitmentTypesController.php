@@ -17,6 +17,14 @@ class CommitmentTypesController extends Controller
             'data' => CommitmentTypes::all()
         ]);
     }
+    // show
+    public function show($id)
+    {
+        return response()->json([
+            'message' => 'Commitment Type',
+            'data' => CommitmentTypes::findOrFail($id)
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      */
