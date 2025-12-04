@@ -36,11 +36,12 @@ class CommitmentTypesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CommitmentTypes $commitmentTypes)
+    public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
             'CommitmentType' => 'required|string|max:255',
         ]);
+        $commitmentTypes = CommitmentTypes::findOrFail($id);
         $commitmentTypes->update($validatedData);
         $commitmentTypes->refresh();
         return response()->json([
