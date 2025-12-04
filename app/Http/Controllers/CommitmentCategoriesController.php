@@ -26,6 +26,8 @@ class CommitmentCategoriesController extends Controller
             'Category' => 'required|string|max:255',
         ]);
         $commitmentCategory = CommitmentCategories::create($validatedData);
+
+        $commitmentCategory->refresh();
         return response()->json([
             'message' => 'Commitment Category created successfully',
             'data' => $commitmentCategory
@@ -35,12 +37,14 @@ class CommitmentCategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CommitmentCategories $commitmentCategories)
+    public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
             'Category' => 'required|string|max:255',
         ]);
+        $commitmentCategories = CommitmentCategories::findOrFail($id);
         $commitmentCategories->update($validatedData);
+        $commitmentCategories->refresh();
         return response()->json([
             'message' => 'Commitment Category updated successfully',
             'data' => $commitmentCategories

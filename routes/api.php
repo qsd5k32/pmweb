@@ -104,9 +104,7 @@ Route::prefix('CompanyTypes')->group(function () {
 });
 Route::apiResource('/ChangeOrdersDetails', App\Http\Controllers\ChangeOrdersDetailsController::class);
 Route::apiResource('/SiteHandOverDays', App\Http\Controllers\SiteHandOverDaysController::class);
-Route::apiResource('/CommitmentCategories', App\Http\Controllers\CommitmentCategoriesController::class)->only([
-    'index', 'store', 'destroy'
-]);
+Route::apiResource('/CommitmentCategories', App\Http\Controllers\CommitmentCategoriesController::class);
 Route::apiResource('/CommitmentTypes', App\Http\Controllers\CommitmentTypesController::class);
 Route::apiResource('/CompaniesList', App\Http\Controllers\CompaniesListController::class);
 // Route::get('/CompaniesList', [App\Http\Controllers\CompaniesListController::class, 'index']);
